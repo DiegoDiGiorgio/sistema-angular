@@ -1,0 +1,80 @@
+<body ng-app>
+    <div style="background-color: royalblue; padding:10px;">
+        <div class="col-12"><h3>Usuarios</h3></div>
+    </div>
+    <br>
+    <div class="d-flex">
+        <div class="col-2">
+         <button type="button" class="btn btn-primary" data-toggle="modal" (click)="mostrarModal(modal)">Agregar Usuario</button>
+        </div>
+        <div class="col-10">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                      </svg></span>
+                </div>
+                <input #myInput type="text" class="form-control" placeholder="Buscar Usuario" (keyup)="filtro(myInput.value)">
+            </div>
+        </div>
+    </div>
+    <br>
+    <ng-template #modal let-modal>
+        <div class="modal-header" style="background-color: royalblue;">
+            <h3 class="modal-title" id="modal-basic-title">Agregar Usuario</h3>
+        </div>
+        <div class="modal-body">
+            <form id="userForm" #f="ngForm" (ngSubmit)="[onSubmit(f), modal.dismiss()]">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>nombre: </label> 
+                        <input ngModel class="form-control" type="text" name="name" id="name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Apellido: </label> 
+                        <input ngModel class="form-control" type="text" name="lastName" id="lastName">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>contraseña: </label> 
+                        <input ngModel class="form-control" type="password" name="password" id="password">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Email: </label> 
+                        <input ngModel class="form-control" type="email" name="mail" id="mail">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group custom-control custom-switch">
+                        <input ngModel type="checkbox" class="form-control custom-control-input" indeterminate
+                         name="isSuperUser" id="superUserSwitch">
+                        <label class="custom-control-label" for="superUserSwitch">Es Super Usuario ?</label>
+                    </div>
+                 </div>  
+                <br>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" form="userForm" >Agregar</button>
+                    <button type="button" class="btn btn-danger" (click)="modal.dismiss()">cancelar</button>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+    <ul class="list-group" style="
+    max-height: 60vh;
+    margin-bottom: 10px;
+    overflow-y:auto;">
+        <div class="text-center alert-info" *ngIf="filtrados.length == 0"> <p>No se han encontrado resultados</p> </div>        
+        <li 
+            *ngFor="let user of filtrados"
+            class="list-group-item">
+            <div class="alert alert-dark">
+                <div>
+                {{user.username}}  
+                <!-- <button style="float:inline-end;" type="button" class="btn btn-outline-danger" (click)=mostrarModal(modalEliminar)>x</button> -->
+                </div>
+            </div> 
+        </li>
+    </ul>
+    </body>

@@ -1,0 +1,29 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@auth0/angular-jwt": "^4.2.0",
+    "angular": "^1.8.2",
+    "angular-jwt": "^0.1.11",
+    "angular2-jwt": "^0.2.3",
+    "jsrsasign": "^10.1.4",
+    "url-polyfill": "^1.1.12",
+    "v4": "0.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DiegoDiGiorgio/SistemaVentasFront.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DiegoDiGiorgio/SistemaVentasFront/issues"
+  },
+  "homepage": "https://github.com/DiegoDiGiorgio/SistemaVentasFront#readme"
+}

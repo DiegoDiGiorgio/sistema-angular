@@ -1,0 +1,75 @@
+<body ng-app >
+    <div class="text-center" style="padding-bottom: 2px; background-color: royalblue;">
+        <br>    
+        <h1><u>{{product.name}}</u></h1>
+        <br>
+    </div>
+    <div style="padding-inline: 50px; background-color: royalblue;">
+        <table class=" table table-dark table-bordered">
+            <tr>
+                <td><label>Stock:</label> {{product.stock}}</td>
+                <td><label>Stock Minimo:</label> {{product.min_stock}}</td>
+            </tr>
+            <tr>
+                <td><label>Categoria:</label> {{product.category.name}}</td>
+                <td><label>Provedor:</label> <a [routerLink]="['/provedores/'  + product.provider.id]"> {{product.provider.name}}</a></td>
+            </tr>
+            <tr>
+                <td><label>Precio de costo:</label> {{product.base_price | currency}}</td>
+                <td><label>Precio:</label> {{product.sell_price | currency}}</td>
+            </tr>
+            <tr>
+                <td><label>Codigo de barras:</label> {{product.bar_code}}</td>
+                <td>meter la ultima fecha de modificacion</td>
+            </tr>
+    </table>
+    </div>
+    
+    <div style="float:right; padding-right:70px; ">
+        <button type="button" class="btn btn-primary" data-toggle="modal" (click)=mostrarModal(modal) style = "margin-right: 5px;">Modificar Producto</button>
+        <button type="button" routerLink="/productos"  class="btn btn-primary">Volver</button>
+    </div>  
+</body>
+<ng-template #modal let-modal>
+    <div class="modal-header" style="background-color: royalblue;">
+        <h3 class="modal-title" id="modal-basic-title">Modificar {{product.name}}</h3>
+    </div>
+    <div class="modal-body">
+        <form id="productoForm" #f="ngForm" (ngSubmit)="[onSubmit(f.value), modal.dismiss()]">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Nombre: </label> 
+                    <input ngModel={{product.name}}  class="form-control" type="text" name="name" id="name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Codigo De Barras: </label> 
+                    <input ngModel={{product.bar_code}} class="form-control" type="number" name="bar_code" id="bar_code">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>stock minimo: </label> 
+                    <input ngModel={{product.min_stock}} class="form-control" type="float" name="min_stock" id="minStock">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>stock: </label> 
+                    <input ngModel={{product.stock}} class="form-control" type="number" name="stock" id="stock">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>precio: </label> 
+                    <input ngModel={{product.sell_price}} class="form-control" type="float" name="sell_price" id="price">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>precio de costo: </label> 
+                    <input ngModel={{product.base_price}} class="form-control" type="float" name="base_price" id="cost">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="productoForm" >Modificar</button>
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss()">cancelar</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
